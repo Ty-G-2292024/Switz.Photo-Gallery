@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Portfolio",
+            "type": "chrome",
+            "request": "launch",
+            "url": "file:///c%3A/Users/Ty/Documents/GitHub/Switz.Photo-Gallery/index.html",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "webpack:///./src/*": "${webRoot}/src/*"
+            }
+        }
+    ]
+}
