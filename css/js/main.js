@@ -35,13 +35,33 @@ document.querySelectorAll('.gallery-item, .about').forEach(element => {
     observer.observe(element);
 });
 
-// ===== GALLERY ITEM HOVER EFFECT =====
+// ===== SPOTLIGHT & 3D TILT EFFECT ON GALLERY ITEMS =====
 document.querySelectorAll('.gallery-item').forEach(item => {
-    item.addEventListener('mouseenter', function() {
-        this.style.boxShadow = '0 12px 20px rgba(52, 152, 219, 0.3)';
+    item.addEventListener('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Update spotlight effect
+        this.style.setProperty('--mouse-x', `${x}px`);
+        this.style.setProperty('--mouse-y', `${y}px`);
+        
+        // 3D Tilt effect
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotationX = ((y - centerY) / centerY) * 20;
+        const rotationY = ((centerX - x) / centerX) * 20;
+        
+        this.style.transform = `perspective(800px) rotateX(${rotationX}deg) rotateY(${rotationY}deg) scale(1.08)`;
     });
 
     item.addEventListener('mouseleave', function() {
-        this.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+        // Reset spotlight
+        this.style.setProperty('--mouse-x', '50%');
+        this.style.setProperty('--mouse-y', '50%');
+        
+        // Reset 3D tilt and return to normal scale
+        this.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
     });
 });
