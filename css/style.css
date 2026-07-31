@@ -110,10 +110,15 @@ body {
     display: block;
     border-radius: 12px;
     object-fit: cover;
+    object-position: center;
     position: relative;
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    image-rendering: -webkit-optimize-contrast;  /* Sharp scaling */
+    transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+    transform-origin: center center;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+    image-rendering: auto;
 }
 
 
@@ -133,7 +138,7 @@ body {
 }
 
 .gallery-item:hover {
-    transform: scale(1.08);
+    transform: scale(1.03) translateZ(0);
     box-shadow: 0 12px 20px rgba(87, 129, 221, 0.4);
 }
 
